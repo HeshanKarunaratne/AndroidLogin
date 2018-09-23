@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E1E1E1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtUsername"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+
+                android:fontFamily="sans-serif"
+                android:gravity="center_horizontal"
+                android:text="GPA"
+                android:textColor="@color/lightblue"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/h_spinner"
+                    android:layout_weight="3"/>
+
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/subjectSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/h_spinner"
+                    android:layout_margin="10dp"
+                    android:background="#ffffff"
+                    app:ms_multiline="false"
+                    app:ms_arrowSize="15dp"
+                    app:ms_baseColor="@color/lightblue"
+                    app:ms_hint="Subject"
+                    app:ms_floatingLabelColor="@color/lightblue"
+                    app:ms_floatingLabelText="Subject"
+                    android:layout_weight="4">
+
+                </fr.ganfra.materialspinner.MaterialSpinner>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/h_spinner"
+                    android:layout_weight="3"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="7"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+
+            <RelativeLayout
+                android:id="@+id/relative"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+
+                <TextView
+                    android:id="@+id/textview"
+                    android:layout_width="130dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="No of Credits"
+                    android:textSize="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/textview2"
+                    android:layout_width="130dp"
+                    android:layout_height="30dp"
+                    android:layout_alignStart="@+id/textview"
+                    android:layout_below="@+id/textview"
+                    android:layout_marginTop="20dp"
+                    android:text="GPA"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/textCredit"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@+id/textview" />
+
+                <TextView
+                    android:id="@+id/textGpa"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/textCredit"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/textview2"
+                    android:gravity="center_vertical|center_horizontal"/>
+
+
+
+
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_settings"
+                    android:backgroundTint="#2385B3"
+                    app:borderWidth="0dp"
+                    app:fabSize="normal">
+
+                </android.support.design.widget.FloatingActionButton>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+
+
+

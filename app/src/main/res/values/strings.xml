@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">FAS Exam Result</string>
+    <string name="result">Result</string>
+    <string name="gpa">GPA</string>
+    <string name="attempt">ATTEMPT</string>
+    <string name="rank">RANK</string>
+    <string name="CourseDesc">coursedesc</string>
+    <string name="CourseCode">coursecode</string>
+    <string name="Grade">grade</string>
+
+    <string-array name="names">
+
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+</resources>
+
