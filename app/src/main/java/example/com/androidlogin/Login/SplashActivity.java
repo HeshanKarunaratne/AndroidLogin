@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import example.com.androidlogin.R;
 
-public class Splash extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
 
     private ImageView iv;
