@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.SystemClock;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,7 +15,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import android.util.Log;
 import example.com.androidlogin.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +28,8 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher,
     EditText edtPassword;
     Button btnLogin;
     UserService userService;
+    String username;
+    String password;
     private CheckBox rem_userpass;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -35,10 +38,15 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher,
     private static final String KEY_PASS = "password";
     private static final String KEY_REMEMBER = "remember";
     long mLastClickTime = 0;
+    TextInputLayout textInputLayout3;
+    TextInputLayout textInputLayout2;
+    private static final String TAG = "LoginActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        textInputLayout2= (TextInputLayout)findViewById(R.id.textInputLayout2);
+        textInputLayout3= (TextInputLayout)findViewById(R.id.textInputLayout3);
         edtUsername=(EditText)findViewById(R.id.edtUsername);
         edtPassword=(EditText) findViewById(R.id.edtPassword);
         btnLogin=(Button)findViewById(R.id.btnLogin);
@@ -69,38 +77,50 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher,
                     return;
                 }
                 mLastClickTime = SystemClock.elapsedRealtime();
-                String username=edtUsername.getText().toString();
-                String password=edtPassword.getText().toString();
-                      //validate form
+                username=edtUsername.getText().toString();
+                password=edtPassword.getText().toString();
+
                 if(validateLogin(username,password)){
-                    //do login
+
                     doLogin(username,password);
                 }
             }
         });
+
     }
     private boolean validateLogin(String username,String password){
         if(username==null || username.trim().length()==0){
-            Toast.makeText(this,"Username is required",Toast.LENGTH_SHORT).show();
+//
+            textInputLayout3.setError("Username is required");
+            Log.i(TAG,"Enter a valid username");
             return false;
+        }else{
+            textInputLayout3.setError(null);
+            Log.i(TAG,"username entered");
         }
+
         if(password==null || password.trim().length()==0){
-            Toast.makeText(this,"password is required",Toast.LENGTH_SHORT).show();
+            textInputLayout2.setError("Password is required");
+            Log.i(TAG,"Enter a valid password");
             return false;
+        }else{
+            textInputLayout2.setError(null);
+            Log.i(TAG,"password entered");
         }
+        Log.i(TAG,"both username and password entered");
            return true;
     }
+
     private void doLogin(final String username,final String password){
 
         Call<ResObj> call=userService.login(username,password);
         call.enqueue(new Callback<ResObj>() {
             @Override
             public void onResponse(Call<ResObj> call, Response<ResObj> response) {
-                System.out.println("******");
+
                 if(response.isSuccessful()){
                     ResObj resObj=response.body();
                     if(resObj.getMessage().equals("true")){
-                       //loginstart
 
                     Intent intent=new Intent(LoginActivity.this, MainActivity.class);
 
@@ -114,9 +134,14 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher,
                         intent.putExtra("lastWord",lastWord);
                         intent.putExtra("Combination",Combination);
                         intent.putExtra("Token",token);
+                        intent.putExtra("KEY_USERNAME",KEY_USERNAME);
+                        intent.putExtra("KEY_PASS",KEY_PASS);
                         startActivity(intent);
+
                     }else{
                         Toast.makeText(LoginActivity.this,"The username or password is incorrect",Toast.LENGTH_SHORT).show();
+                        edtPassword.setText("");
+
                     }
                 }else{
                     Toast.makeText(LoginActivity.this,"Error please try again",Toast.LENGTH_SHORT).show();
@@ -127,6 +152,7 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher,
                 Toast.makeText(LoginActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     @Override
@@ -141,14 +167,14 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher,
 
     private void managePrefs() {
         if(rem_userpass.isChecked()){
+            editor.putBoolean(KEY_REMEMBER, true);
             editor.putString(KEY_USERNAME, edtUsername.getText().toString().trim());
             editor.putString(KEY_PASS, edtPassword.getText().toString().trim());
-            editor.putBoolean(KEY_REMEMBER, true);
             editor.apply();
         }else{
             editor.putBoolean(KEY_REMEMBER, false);
-            editor.remove(KEY_PASS);//editor.putString(KEY_PASS,"");
-            editor.remove(KEY_USERNAME);//editor.putString(KEY_USERNAME, "");
+            editor.remove(KEY_PASS);
+            editor.remove(KEY_USERNAME);
             editor.apply();
         }
     }

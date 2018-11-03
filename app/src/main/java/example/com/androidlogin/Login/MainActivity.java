@@ -1,12 +1,16 @@
 package example.com.androidlogin.Login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.SystemClock;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
     CardView rankCard;
     long mLastClickTime = 0;
     static String token;
+
+    String KEY_USERNAME;
+    String KEY_PASS;
+    EditText edtUsername;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,11 +63,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         if(extras!=null){
-
+            username = extras.getString("username");
             StdName=extras.getString("lastWord");
             Combination=extras.getString("Combination");
             txtUsername.setText("Welcome "+StdName);
             token=extras.getString("Token");
+            KEY_USERNAME = extras.getString("KEY_USERNAME");
+            KEY_PASS =extras.getString("KEY_PASS");
         }
 
 
@@ -164,7 +174,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
+
 
     }
 
+
+}

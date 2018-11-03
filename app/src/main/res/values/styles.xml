@@ -13,5 +13,9 @@
         <item name="colorButtonNormal">@color/pink</item>
     </style>
 
+    <style name="ErrorText" parent="TextAppearance.Design.Error">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/lightred</item>
+    </style>
 
 </resources>
