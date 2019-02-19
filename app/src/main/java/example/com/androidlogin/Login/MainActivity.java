@@ -3,14 +3,17 @@ package example.com.androidlogin.Login;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Icon;
 import android.os.SystemClock;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,12 +42,17 @@ public class MainActivity extends AppCompatActivity {
     CardView attemptCard;
     CardView gpaCard;
     CardView rankCard;
+    ImageView logout;
+
+    private static final String TAG = "MainActivity";
     long mLastClickTime = 0;
     static String token;
 
     String KEY_USERNAME;
     String KEY_PASS;
+    String PREF_NAME;
     EditText edtUsername;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         attemptCard=(CardView)findViewById(R.id.attemptCard);
         gpaCard=(CardView)findViewById(R.id.gpaCard);
         rankCard=(CardView)findViewById(R.id.rankCard);
+        logout = (ImageView)findViewById(R.id.logout);
 
         userService= ApiUtils.getUserService();
         Grand="Grand";
@@ -66,10 +75,11 @@ public class MainActivity extends AppCompatActivity {
             username = extras.getString("username");
             StdName=extras.getString("lastWord");
             Combination=extras.getString("Combination");
-            txtUsername.setText("Welcome "+StdName);
+            txtUsername.setText(StdName);
             token=extras.getString("Token");
             KEY_USERNAME = extras.getString("KEY_USERNAME");
             KEY_PASS =extras.getString("KEY_PASS");
+            PREF_NAME = extras.getString("PREFS");
         }
 
 
@@ -172,6 +182,28 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("Subject3", Subject3);
                 intent.putExtra("Token",token);
                 startActivity(intent);
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+
+                    SharedPreferences sp=getSharedPreferences("PREFS",MODE_PRIVATE);
+                    SharedPreferences.Editor e=sp.edit();
+                    e.clear();
+                    e.commit();
+
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    finish();
+                    startActivity(intent);
+                }catch (Exception e){
+                    Log.i(TAG,"Error in logging out",e);
+                }
             }
         });
 

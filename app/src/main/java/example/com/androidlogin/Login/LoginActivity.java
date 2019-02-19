@@ -134,6 +134,7 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher,
                         intent.putExtra("lastWord",lastWord);
                         intent.putExtra("Combination",Combination);
                         intent.putExtra("Token",token);
+                        intent.putExtra("PREFS",PREF_NAME);
                         intent.putExtra("KEY_USERNAME",KEY_USERNAME);
                         intent.putExtra("KEY_PASS",KEY_PASS);
                         startActivity(intent);
@@ -141,6 +142,7 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher,
                     }else{
                         Toast.makeText(LoginActivity.this,"The username or password is incorrect",Toast.LENGTH_SHORT).show();
                         edtPassword.setText("");
+                        edtUsername.setText("");
 
                     }
                 }else{

@@ -12,30 +12,39 @@
         android:id="@+id/icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="32dp"
         android:src="@drawable/ic_user"
-        app:layout_constraintBottom_toTopOf="@+id/attemptCard"
-        app:layout_constraintEnd_toEndOf="@+id/attemptCard"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toTopOf="@+id/resultCard"
+        app:layout_constraintStart_toStartOf="@+id/resultCard"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtUsername"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/icon"
-        app:layout_constraintEnd_toStartOf="@+id/icon"
+        app:layout_constraintStart_toEndOf="@+id/icon"
+        app:layout_constraintTop_toTopOf="@+id/icon" />
+
+    <ImageView
+        android:id="@+id/logout"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:rotation="270"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintBottom_toTopOf="@+id/attemptCard"
+        app:layout_constraintEnd_toEndOf="@+id/attemptCard"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/icon"
-        app:layout_constraintVertical_bias="0.392" />
+        app:layout_constraintStart_toEndOf="@+id/txtUsername"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.48" />
 
 
     <android.support.v7.widget.CardView
